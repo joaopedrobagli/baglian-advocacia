@@ -20,8 +20,7 @@
             </span>
         </a>
 
-        <!-- MENU DESKTOP -->
-        <nav class="hidden md:block">
+        <nav class="hidden md:flex items-center gap-6">
             <?php
             wp_nav_menu(array(
                 'theme_location' => 'header-menu',
@@ -31,9 +30,19 @@
                 'walker'         => new Baglian_Nav_Walker(),
             ));
             ?>
+
+            <?php if (function_exists('pll_the_languages')) : ?>
+                <?php $idiomas = pll_the_languages(array('raw' => 1)); ?>
+                <div class="flex gap-2 text-sm text-zinc-300 border-l border-zinc-700 pl-6">
+                    <?php foreach ($idiomas as $idioma) : ?>
+                        <a href="<?php echo esc_url($idioma['url']); ?>" class="<?php echo $idioma['current_lang'] ? 'text-white font-semibold' : 'hover:text-white'; ?> transition">
+                            <?php echo esc_html(strtoupper($idioma['slug'])); ?>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
         </nav>
 
-        <!-- BOTÃO HAMBÚRGUER (só mobile) -->
         <button id="baglian-menu-toggle" class="md:hidden text-white p-2" aria-label="Abrir menu">
             <svg id="icon-menu-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -55,6 +64,17 @@
             'fallback_cb'    => false,
         ));
         ?>
+
+        <?php if (function_exists('pll_the_languages')) : ?>
+            <?php $idiomas_mobile = pll_the_languages(array('raw' => 1)); ?>
+            <div class="flex gap-3 px-4 pb-4 text-sm text-zinc-300 border-t border-zinc-800 pt-3">
+                <?php foreach ($idiomas_mobile as $idioma) : ?>
+                    <a href="<?php echo esc_url($idioma['url']); ?>" class="<?php echo $idioma['current_lang'] ? 'text-white font-semibold' : 'hover:text-white'; ?> transition">
+                        <?php echo esc_html(strtoupper($idioma['slug'])); ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
     </nav>
 </header>
 
