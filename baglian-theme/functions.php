@@ -1,21 +1,17 @@
 <?php
 /**
- * Baglian Theme functions and definitions
+ * Funções e definições do tema Baglian
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-/**
- * Walker customizado para o menu do header:
- * o último item (Contato) recebe estilo de botão (pill com borda vinho)
- */
 class Baglian_Nav_Walker extends Walker_Nav_Menu {
     public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
-        $is_last = in_array('menu-item-contato', $item->classes) || strtolower($item->title) === 'contato';
+        $e_ultimo = in_array('menu-item-contato', $item->classes) || strtolower($item->title) === 'contato';
 
-        if ($is_last) {
+        if ($e_ultimo) {
             $output .= '<a href="' . esc_url($item->url) . '" class="border border-rose-400 text-rose-400 px-4 py-2 rounded-full hover:bg-rose-400 hover:text-zinc-900 transition">' . esc_html($item->title) . '</a>';
         } else {
             $output .= '<a href="' . esc_url($item->url) . '" class="hover:text-white transition">' . esc_html($item->title) . '</a>';
@@ -23,10 +19,7 @@ class Baglian_Nav_Walker extends Walker_Nav_Menu {
     }
 }
 
-/**
- * Enfileira o CSS compilado do Tailwind
- */
-function baglian_enqueue_assets() {
+function baglian_carrega_estilos() {
     wp_enqueue_style(
         'baglian-style',
         get_template_directory_uri() . '/assets/css/style.css',
@@ -34,32 +27,32 @@ function baglian_enqueue_assets() {
         filemtime(get_template_directory() . '/assets/css/style.css')
     );
 }
-add_action('wp_enqueue_scripts', 'baglian_enqueue_assets');
+add_action('wp_enqueue_scripts', 'baglian_carrega_estilos');
 
 /**
- * Registra o menu do header
+ * Cadastra o menu do header
  */
-function baglian_register_menus() {
+function baglian_cadastra_menus() {
     register_nav_menus(array(
         'header-menu' => __('Menu Header', 'baglian-theme'),
     ));
 }
-add_action('after_setup_theme', 'baglian_register_menus');
+add_action('after_setup_theme', 'baglian_cadastra_menus');
 
 /**
- * Suporte a recursos do tema
+ * Configura recursos do tema
  */
-function baglian_theme_setup() {
+function baglian_configura_tema() {
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
 }
-add_action('after_setup_theme', 'baglian_theme_setup');
+add_action('after_setup_theme', 'baglian_configura_tema');
 
 /**
- * Custom Post Type: Advogados
+ * Tipo de Post Customizado: Advogados
  */
-function baglian_register_cpt_advogados() {
-    $labels = array(
+function baglian_cadastra_cpt_advogados() {
+    $rotulos = array(
         'name'                  => __('Advogados', 'baglian-theme'),
         'singular_name'         => __('Advogado', 'baglian-theme'),
         'menu_name'             => __('Advogados', 'baglian-theme'),
@@ -73,9 +66,9 @@ function baglian_register_cpt_advogados() {
         'all_items'             => __('Todos os Advogados', 'baglian-theme'),
     );
 
-    $args = array(
+    $opcoes = array(
         'label'                 => __('Advogados', 'baglian-theme'),
-        'labels'                => $labels,
+        'labels'                => $rotulos,
         'public'                => true,
         'has_archive'           => false,
         'show_in_menu'          => true,
@@ -85,29 +78,27 @@ function baglian_register_cpt_advogados() {
         'rewrite'               => array('slug' => 'advogados'),
     );
 
-    register_post_type('advogado', $args);
+    register_post_type('advogado', $opcoes);
 }
-add_action('init', 'baglian_register_cpt_advogados');
+add_action('init', 'baglian_cadastra_cpt_advogados');
 
 /**
- * Página de Configurações do Site (substitui ACF Options Page,
- * que é recurso exclusivo do ACF PRO)
+ * Página de Configurações do Site 
  */
 
-// 1. Adiciona o item de menu
-function baglian_add_settings_page() {
+function baglian_adiciona_pagina_configuracoes() {
     add_options_page(
         'Configurações do Site',
         'Configurações do Site',
         'manage_options',
         'baglian-configuracoes',
-        'baglian_render_settings_page'
+        'baglian_exibe_pagina_configuracoes'
     );
 }
-add_action('admin_menu', 'baglian_add_settings_page');
+add_action('admin_menu', 'baglian_adiciona_pagina_configuracoes');
 
-// 2. Registra os campos via Settings API
-function baglian_register_settings() {
+function baglian_cadastra_configuracoes() {
+    register_setting('baglian_settings_group', 'baglian_tagline', array('sanitize_callback' => 'sanitize_text_field'));
     register_setting('baglian_settings_group', 'baglian_endereco', array('sanitize_callback' => 'sanitize_text_field'));
     register_setting('baglian_settings_group', 'baglian_telefone', array('sanitize_callback' => 'sanitize_text_field'));
     register_setting('baglian_settings_group', 'baglian_email', array('sanitize_callback' => 'sanitize_email'));
@@ -116,10 +107,9 @@ function baglian_register_settings() {
     register_setting('baglian_settings_group', 'baglian_copyright', array('sanitize_callback' => 'sanitize_text_field'));
     register_setting('baglian_settings_group', 'baglian_maps_embed', array('sanitize_callback' => 'sanitize_text_field'));
 }
-add_action('admin_init', 'baglian_register_settings');
+add_action('admin_init', 'baglian_cadastra_configuracoes');
 
-// 3. Renderiza o formulário HTML da página
-function baglian_render_settings_page() {
+function baglian_exibe_pagina_configuracoes() {
     ?>
     <div class="wrap">
         <h1>Configurações do Site</h1>
@@ -127,6 +117,10 @@ function baglian_render_settings_page() {
         <form method="post" action="options.php">
             <?php settings_fields('baglian_settings_group'); ?>
             <table class="form-table">
+                <tr>
+                    <th><label for="baglian_tagline">Tagline (frase curta do rodapé)</label></th>
+                    <td><input type="text" id="baglian_tagline" name="baglian_tagline" value="<?php echo esc_attr(get_option('baglian_tagline')); ?>" class="regular-text"></td>
+                </tr>
                 <tr>
                     <th><label for="baglian_endereco">Endereço</label></th>
                     <td><input type="text" id="baglian_endereco" name="baglian_endereco" value="<?php echo esc_attr(get_option('baglian_endereco')); ?>" class="regular-text"></td>
