@@ -75,11 +75,14 @@ $quem_somos      = get_field('quem_somos_texto');
         <h2 class="text-2xl md:text-3xl font-semibold text-white text-center mb-12"><?php echo pll__('Nossos Advogados'); ?></h2>
 
         <?php
+        $idioma_atual = function_exists('pll_current_language') ? pll_current_language() : '';
+
         $advogados_query = new WP_Query(array(
             'post_type'      => 'advogado',
             'posts_per_page' => -1,
             'orderby'        => 'title',
             'order'          => 'ASC',
+            'lang'           => $idioma_atual,
         ));
         ?>
 
@@ -119,6 +122,7 @@ $quem_somos      = get_field('quem_somos_texto');
             'posts_per_page' => 3,
             'orderby'        => 'date',
             'order'          => 'DESC',
+            'lang'           => $idioma_atual,
         ));
         $posts_noticias = $noticias_query->posts;
         ?>
