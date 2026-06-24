@@ -29,9 +29,7 @@ function baglian_carrega_estilos() {
 }
 add_action('wp_enqueue_scripts', 'baglian_carrega_estilos');
 
-/**
- * Cadastra o menu do header
- */
+
 function baglian_cadastra_menus() {
     register_nav_menus(array(
         'header-menu' => __('Menu Header', 'baglian-theme'),
@@ -39,18 +37,12 @@ function baglian_cadastra_menus() {
 }
 add_action('after_setup_theme', 'baglian_cadastra_menus');
 
-/**
- * Configura recursos do tema
- */
 function baglian_configura_tema() {
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
 }
 add_action('after_setup_theme', 'baglian_configura_tema');
 
-/**
- * Tipo de Post Customizado: Advogados
- */
 function baglian_cadastra_cpt_advogados() {
     $rotulos = array(
         'name'                  => __('Advogados', 'baglian-theme'),
@@ -81,10 +73,6 @@ function baglian_cadastra_cpt_advogados() {
     register_post_type('advogado', $opcoes);
 }
 add_action('init', 'baglian_cadastra_cpt_advogados');
-
-/**
- * Página de Configurações do Site 
- */
 
 function baglian_adiciona_pagina_configuracoes() {
     add_options_page(
