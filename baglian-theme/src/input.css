@@ -5,3 +5,30 @@
 body {
     overflow-x: clip;
 }
+
+header nav:not(#baglian-mobile-menu) ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+header nav:not(#baglian-mobile-menu) ul li {
+    display: inline-flex;
+}
+
+#baglian-mobile-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#baglian-mobile-menu a {
+    display: block;
+    text-align: center;
+    padding: 0.875rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+#baglian-mobile-menu li:last-child a {
+    border-bottom: none;
+}

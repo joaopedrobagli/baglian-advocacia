@@ -41,9 +41,9 @@
         </div>
 
         <div class="mt-8 pt-6 border-t border-gray-200">
-            <a href="<?php echo esc_url(home_url('/#noticias')); ?>" class="text-rose-800 font-medium hover:underline">
-                ← Voltar para as notícias
-            </a>
+          <a href="<?php echo esc_url(pll_home_url() . '#noticias'); ?>" class="text-rose-800 font-medium hover:underline">
+          <?php echo pll__('← Voltar para as notícias'); ?>
+         </a>
         </div>
 
     <?php endwhile; ?>
