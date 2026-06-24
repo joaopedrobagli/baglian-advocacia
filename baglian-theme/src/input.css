@@ -2,6 +2,6 @@
 @source "../**/*.php";
 @plugin "@tailwindcss/typography";
 
-html, body {
-    overflow-x: hidden;
+body {
+    overflow-x: clip;
 }
