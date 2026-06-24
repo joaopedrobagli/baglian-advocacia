@@ -54,20 +54,19 @@
 
     </div>
 
-    <!-- MENU MOBILE (dropdown) -->
     <nav id="baglian-mobile-menu" class="hidden md:hidden bg-zinc-950 border-t border-zinc-800">
         <?php
         wp_nav_menu(array(
             'theme_location' => 'header-menu',
             'container'      => false,
-            'menu_class'     => 'flex flex-col gap-1 px-4 py-4 text-sm font-medium text-zinc-300',
+            'menu_class'     => 'flex flex-col text-base font-medium text-zinc-300 py-2',
             'fallback_cb'    => false,
         ));
         ?>
 
         <?php if (function_exists('pll_the_languages')) : ?>
             <?php $idiomas_mobile = pll_the_languages(array('raw' => 1)); ?>
-            <div class="flex gap-3 px-4 pb-4 text-sm text-zinc-300 border-t border-zinc-800 pt-3">
+            <div class="flex justify-center gap-4 px-6 py-4 text-sm text-zinc-300 border-t border-zinc-800">
                 <?php foreach ($idiomas_mobile as $idioma) : ?>
                     <a href="<?php echo esc_url($idioma['url']); ?>" class="<?php echo $idioma['current_lang'] ? 'text-white font-semibold' : 'hover:text-white'; ?> transition">
                         <?php echo esc_html(strtoupper($idioma['slug'])); ?>

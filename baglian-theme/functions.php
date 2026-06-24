@@ -158,3 +158,28 @@ function baglian_exibe_pagina_configuracoes() {
     </div>
     <?php
 }
+function baglian_registra_strings_traduzveis() {
+    if (function_exists('pll_register_string')) {
+        pll_register_string('quem_somos_titulo', 'Quem Somos', 'Baglian Theme');
+        pll_register_string('estatistica_anos', 'Anos de atuação', 'Baglian Theme');
+        pll_register_string('estatistica_casos', 'Casos atendidos', 'Baglian Theme');
+        pll_register_string('estatistica_satisfacao', 'Satisfação', 'Baglian Theme');
+        pll_register_string('advogados_titulo', 'Nossos Advogados', 'Baglian Theme');
+        pll_register_string('advogados_sem_foto', 'Sem foto', 'Baglian Theme');
+        pll_register_string('advogados_vazio', 'Nenhum advogado cadastrado ainda.', 'Baglian Theme');
+        pll_register_string('noticias_titulo', 'Últimas Notícias', 'Baglian Theme');
+        pll_register_string('noticias_vazio', 'Nenhuma notícia publicada ainda.', 'Baglian Theme');
+        pll_register_string('contato_titulo', 'Encontre-nos Facilmente', 'Baglian Theme');
+        pll_register_string('contato_subtitulo', 'Estamos prontos para atender você. Confira nossos dados de contato e localização.', 'Baglian Theme');
+        pll_register_string('contato_endereco_label', 'Nosso Endereço', 'Baglian Theme');
+        pll_register_string('contato_telefone_label', 'Telefone:', 'Baglian Theme');
+        pll_register_string('contato_whatsapp_label', 'WhatsApp:', 'Baglian Theme');
+        pll_register_string('contato_email_label', 'E-mail:', 'Baglian Theme');
+        pll_register_string('contato_horario_label', 'Horário:', 'Baglian Theme');
+        pll_register_string('contato_mapa_vazio', 'Mapa não configurado', 'Baglian Theme');
+        pll_register_string('footer_tagline', get_option('baglian_tagline'), 'Baglian Theme');
+        pll_register_string('footer_copyright', get_option('baglian_copyright'), 'Baglian Theme');
+        pll_register_string('voltar_noticias', '← Voltar para as notícias', 'Baglian Theme');
+    }
+}
+add_action('init', 'baglian_registra_strings_traduzveis');

@@ -9,7 +9,6 @@ $hero_cta_link   = get_field('hero_cta_link');
 $quem_somos      = get_field('quem_somos_texto');
 ?>
 
-<!-- HERO BANNER -->
 <section class="relative bg-zinc-950 overflow-hidden">
     <?php if ($hero_imagem) : ?>
         <div class="absolute inset-0">
@@ -46,36 +45,34 @@ $quem_somos      = get_field('quem_somos_texto');
     </div>
 </section>
 
-<!-- QUEM SOMOS -->
 <section id="quem-somos" class="bg-gray-50 py-20">
     <div class="max-w-4xl mx-auto px-4 text-center">
-        <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 mb-4">Quem <span class="text-rose-800">Somos</span></h2>
+        <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 mb-4"><?php echo pll__('Quem Somos'); ?></h2>
         <p class="text-gray-700 text-lg leading-relaxed mb-12 max-w-2xl mx-auto"><?php echo esc_html($quem_somos); ?></p>
 
         <div class="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
             <div class="bg-white border-t-2 border-rose-800 rounded-b-lg py-6 shadow-sm hover:-translate-y-1 transition">
                 <svg class="w-6 h-6 mx-auto text-rose-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                 <p class="text-3xl font-bold text-gray-900 mt-2">20+</p>
-                <p class="text-gray-500 text-sm mt-1">Anos de atuação</p>
+                <p class="text-gray-500 text-sm mt-1"><?php echo pll__('Anos de atuação'); ?></p>
             </div>
             <div class="bg-white border-t-2 border-rose-800 rounded-b-lg py-6 shadow-sm hover:-translate-y-1 transition">
                 <svg class="w-6 h-6 mx-auto text-rose-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m-3 0h14a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg>
                 <p class="text-3xl font-bold text-gray-900 mt-2">500+</p>
-                <p class="text-gray-500 text-sm mt-1">Casos atendidos</p>
+                <p class="text-gray-500 text-sm mt-1"><?php echo pll__('Casos atendidos'); ?></p>
             </div>
             <div class="bg-white border-t-2 border-rose-800 rounded-b-lg py-6 shadow-sm hover:-translate-y-1 transition">
                 <svg class="w-6 h-6 mx-auto text-rose-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 <p class="text-3xl font-bold text-gray-900 mt-2">98%</p>
-                <p class="text-gray-500 text-sm mt-1">Satisfação</p>
+                <p class="text-gray-500 text-sm mt-1"><?php echo pll__('Satisfação'); ?></p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ADVOGADOS -->
 <section id="advogados" class="bg-zinc-900 py-20">
     <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-2xl md:text-3xl font-semibold text-white text-center mb-12">Nossos <span class="text-rose-400">Advogados</span></h2>
+        <h2 class="text-2xl md:text-3xl font-semibold text-white text-center mb-12"><?php echo pll__('Nossos Advogados'); ?></h2>
 
         <?php
         $advogados_query = new WP_Query(array(
@@ -93,7 +90,7 @@ $quem_somos      = get_field('quem_somos_texto');
                         <?php if (has_post_thumbnail()) : ?>
                             <?php the_post_thumbnail('medium', array('class' => 'w-full h-56 object-cover')); ?>
                         <?php else : ?>
-                            <div class="w-full h-56 bg-zinc-700 flex items-center justify-center text-zinc-500 text-sm">Sem foto</div>
+                            <div class="w-full h-56 bg-zinc-700 flex items-center justify-center text-zinc-500 text-sm"><?php echo pll__('Sem foto'); ?></div>
                         <?php endif; ?>
                         <div class="p-6 text-center">
                             <h3 class="text-xl font-semibold text-white mb-1"><?php the_title(); ?></h3>
@@ -105,17 +102,16 @@ $quem_somos      = get_field('quem_somos_texto');
                 <?php endwhile; ?>
             </div>
         <?php else : ?>
-            <p class="text-center text-gray-400">Nenhum advogado cadastrado ainda.</p>
+            <p class="text-center text-gray-400"><?php echo pll__('Nenhum advogado cadastrado ainda.'); ?></p>
         <?php endif; ?>
 
         <?php wp_reset_postdata(); ?>
     </div>
 </section>
 
-<!-- ÚLTIMAS NOTÍCIAS -->
 <section id="noticias" class="bg-white py-20">
     <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 text-center mb-12">Últimas <span class="text-rose-800">Notícias</span></h2>
+        <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 text-center mb-12"><?php echo pll__('Últimas Notícias'); ?></h2>
 
         <?php
         $noticias_query = new WP_Query(array(
@@ -130,7 +126,6 @@ $quem_somos      = get_field('quem_somos_texto');
         <?php if (!empty($posts_noticias)) : ?>
             <div class="grid md:grid-cols-[1.3fr_1fr] gap-6">
 
-                <!-- POST DE DESTAQUE -->
                 <?php
                 $destaque = $posts_noticias[0];
                 ?>
@@ -147,7 +142,6 @@ $quem_somos      = get_field('quem_somos_texto');
                     </div>
                 </a>
 
-                <!-- LISTA COMPACTA -->
                 <div class="flex flex-col gap-5">
                     <?php
                     $resto = array_slice($posts_noticias, 1, 2);
@@ -163,22 +157,20 @@ $quem_somos      = get_field('quem_somos_texto');
 
             </div>
         <?php else : ?>
-            <p class="text-center text-gray-500">Nenhuma notícia publicada ainda.</p>
+            <p class="text-center text-gray-500"><?php echo pll__('Nenhuma notícia publicada ainda.'); ?></p>
         <?php endif; ?>
 
         <?php wp_reset_postdata(); ?>
     </div>
 </section>
 
-<!-- CONTATO -->
 <section id="contato" class="bg-gray-50 py-20">
     <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 text-center mb-4">Encontre-nos <span class="text-rose-800">Facilmente</span></h2>
-        <p class="text-gray-500 text-center mb-12">Estamos prontos para atender você. Confira nossos dados de contato e localização.</p>
+        <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 text-center mb-4"><?php echo pll__('Encontre-nos Facilmente'); ?></h2>
+        <p class="text-gray-500 text-center mb-12"><?php echo pll__('Estamos prontos para atender você. Confira nossos dados de contato e localização.'); ?></p>
 
         <div class="grid md:grid-cols-2 gap-8 items-start">
 
-            <!-- CARD DE INFORMAÇÕES -->
             <div class="bg-white border border-gray-200 rounded-lg p-8">
                 <div class="flex items-start gap-3 mb-6">
                     <svg class="w-6 h-6 text-rose-800 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -186,34 +178,33 @@ $quem_somos      = get_field('quem_somos_texto');
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                     </svg>
                     <div>
-                        <h3 class="font-semibold text-gray-900 text-lg mb-1">Nosso Endereço</h3>
+                        <h3 class="font-semibold text-gray-900 text-lg mb-1"><?php echo pll__('Nosso Endereço'); ?></h3>
                         <p class="text-gray-600"><?php echo esc_html(get_option('baglian_endereco')); ?></p>
                     </div>
                 </div>
 
                 <div class="space-y-3 pt-6 border-t border-gray-100">
                     <p class="text-gray-600">
-                        <span class="font-medium text-gray-900">Telefone:</span>
+                        <span class="font-medium text-gray-900"><?php echo pll__('Telefone:'); ?></span>
                         <?php echo esc_html(get_option('baglian_telefone')); ?>
                     </p>
                     <p class="text-gray-600">
-                        <span class="font-medium text-gray-900">WhatsApp:</span>
+                        <span class="font-medium text-gray-900"><?php echo pll__('WhatsApp:'); ?></span>
                         <?php echo esc_html(get_option('baglian_whatsapp')); ?>
                     </p>
                     <p class="text-gray-600">
-                        <span class="font-medium text-gray-900">E-mail:</span>
+                        <span class="font-medium text-gray-900"><?php echo pll__('E-mail:'); ?></span>
                         <a href="mailto:<?php echo esc_attr(get_option('baglian_email')); ?>" class="hover:text-rose-800">
                             <?php echo esc_html(get_option('baglian_email')); ?>
                         </a>
                     </p>
                     <p class="text-gray-600">
-                        <span class="font-medium text-gray-900">Horário:</span>
+                        <span class="font-medium text-gray-900"><?php echo pll__('Horário:'); ?></span>
                         <?php echo esc_html(get_option('baglian_horario')); ?>
                     </p>
                 </div>
             </div>
 
-            <!-- MAPA -->
             <div class="rounded-lg overflow-hidden border border-gray-200 h-full min-h-[350px]">
                 <?php
                 $maps_url = get_option('baglian_maps_embed');
@@ -229,7 +220,7 @@ $quem_somos      = get_field('quem_somos_texto');
                     </iframe>
                 <?php else : ?>
                     <div class="w-full h-full min-h-[350px] bg-gray-100 flex items-center justify-center text-gray-400">
-                        Mapa não configurado
+                        <?php echo pll__('Mapa não configurado'); ?>
                     </div>
                 <?php endif; ?>
             </div>
